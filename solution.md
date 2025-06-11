@@ -2,12 +2,12 @@
 
 ## 📘 API Endpoints
 
-| Method | Endpoint              | Description                          |
-| ------ | --------------------- | ------------------------------------ |
-| `POST` | `/api/lock`           | Lock a group of seats                |
-| `POST` | `/api/confirm`        | Confirm and reserve locked seats     |
-| `POST` | `/api/cancel-lock`    | Cancel current session's lock        |
-| `GET`  | `/api/seats/:eventID` | Fetch all seats for a specific event |
+| Method | Endpoint                  | Description                          |
+| ------ | ------------------------- | ------------------------------------ |
+| `POST` | `/api/seats/lock`         | Lock a group of seats                |
+| `POST` | `/api/seats/confirm`      | Confirm and reserve locked seats     |
+| `POST` | `/api/seats/release-lock` | Cancel current session's lock        |
+| `GET`  | `/api/seats/:eventID`     | Fetch all seats for a specific event |
 
 ---
 
