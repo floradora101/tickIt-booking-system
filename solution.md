@@ -119,12 +119,11 @@ This system solves it by:
 
 ## Future Recommendations
 
-- Integrate Redis or JWT-based locking for horizontal scaling
 - Add monitoring & error alerting via Slack or Sentry
 - Build frontend UI with real-time seat availability updates
 - Implement retry logic for race conditions
 
--Redis for Lock Management
+- Redis for Lock Management
 
 While the current solution uses MongoDB to store temporary seat locks (`lockUntil`, `lockedBy`), a more efficient and scalable approach would involve using **Redis**
 
@@ -133,13 +132,4 @@ While the current solution uses MongoDB to store temporary seat locks (`lockUnti
 - **Atomic operations**: Redis supports atomic commands like `SET NX EX` to safely manage locks across concurrent requests.
 - **No need for periodic cleanup**: Redis automatically deletes expired locks, reducing backend load and simplifying logic.
 
-### If Redis Is Used, You Can:
 
-- **Remove** the `lockUntil` and `lockedBy` fields from MongoDB.
-- **Delete** the cron job or cleanup function that clears expired locks.
-- **Avoid querying MongoDB** to check if seats are locked — check Redis instead.
-- **Simplify seat locking code** by replacing MongoDB updates with Redis `SET` and `DEL`.
-
-```
-
-```

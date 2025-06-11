@@ -2,6 +2,14 @@ Seat Reservation System Backend
 
 This is a backend system for handling seat reservations, including safe concurrent locking, confirming, and canceling reservations for event-based seating.
 
+Check `solution.md` for more info
+
+### Prerequisites
+
+- Node.js
+- MongoDB instance (local or cloud)
+- npm or yarn
+
 ## Setup
 
 1. Clone this repo
