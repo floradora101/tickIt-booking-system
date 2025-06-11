@@ -5,7 +5,6 @@ import seatRoutes from "./routes/seatRoutes";
 import { clearExpiredLocks } from "./tasks/clearExpiredLocks";
 import session from "express-session";
 import MongoStore from "connect-mongo";
-
 import cron from "node-cron";
 
 cron.schedule("0 * * * *", clearExpiredLocks); // runs at minute 0 of every hour
@@ -15,7 +14,7 @@ dotenv.config();
 const mongoUri = process.env.MONGODB_URI;
 
 if (!mongoUri) {
-  console.error(" MONGODB_URI is not defined in your environment.");
+  console.error(" MONGODB_URI is not defined in your environment");
   process.exit(1);
 }
 

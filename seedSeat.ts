@@ -6,12 +6,12 @@ const MONGODB_URI =
   "mongodb+srv://tickit_admin:tickitpass123@cluster0.lapzzha.mongodb.net/tickitdb?retryWrites=true&w=majority";
 
 if (!MONGODB_URI) {
-  throw new Error("❌ MONGODB_URI is not defined in the environment variables");
+  throw new Error(" MONGODB_URI is not defined in the environment variables");
 }
 async function addSeat() {
   try {
     await mongoose.connect(MONGODB_URI);
-    console.log("✅ Connected to MongoDB");
+    console.log(" Connected to MongoDB");
 
     const seat = new Seat({
       eventID: new mongoose.Types.ObjectId(),

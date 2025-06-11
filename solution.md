@@ -11,6 +11,56 @@
 
 ---
 
+### 1. DB Collections
+
+### Customers
+
+    {
+    \_id: ObjectId,
+    customerID: ObjectId,
+    name: string
+    }
+
+### Events
+
+    {
+    \_id: ObjectId,
+    name: string
+    }
+
+### Seats
+
+    {
+    \_id: ObjectId,
+    eventID: ObjectId,
+    name: string,
+    isTaken: boolean,
+    lockedBy: string | null,
+    lockUntil: Date | null,
+    status: "available" | "locked" | "confirmed",
+    }
+
+### Orders
+
+    {
+    \_id: ObjectId,
+    customerID: ObjectId,
+    amount: number,
+    currency: string,
+    status: "paid" | "failed"
+    }
+
+### Reservations
+
+    {
+    \_id: ObjectId,
+    customerID: ObjectId,
+    eventID: ObjectId,
+    seatIDs: ObjectId[],
+    orderID: ObjectId,
+    status: "confirmed"
+    }
+
 ## How the Solution Works
 
 ### 1. Locking Seats
@@ -35,13 +85,12 @@ The flow is:
 3. If all checks pass, the system locks the seats by:
    - Setting `lockedBy = sessionID`
    - Setting `lockUntil = current time + 10 minutes`
+   - Setting `status = "locked`
 4. Seats are now reserved temporarily for that user only.
-
-This protects the seats from being selected by other users during the checkout process.
 
 ---
 
-### 🔄 3. Lock Expiry and Cleanup
+### 3. Lock Expiry and Cleanup
 
 If the user does not complete the payment:
 
@@ -53,7 +102,7 @@ If the user does not complete the payment:
 
 ---
 
-### 🧹 4. Cleaning Expired session Locks
+### 4. Cleaning Expired session Locks
 
 To avoid seat locks persisting after a user’s session expires (e.g. user closes the browser or logs out), a scheduled cleanup job checks the database regularly.
 
@@ -131,5 +180,3 @@ While the current solution uses MongoDB to store temporary seat locks (`lockUnti
 - **Built-in expiry**: Redis allows setting automatic expiration on keys (e.g., 10-minute seat lock).
 - **Atomic operations**: Redis supports atomic commands like `SET NX EX` to safely manage locks across concurrent requests.
 - **No need for periodic cleanup**: Redis automatically deletes expired locks, reducing backend load and simplifying logic.
-
-

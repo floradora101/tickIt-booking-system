@@ -30,6 +30,7 @@ export const getAvailableSeats = async (
 
 export const lockSeats = async (req: Request, res: Response): Promise<void> => {
   const { seatIDs, eventID, customerID } = req.body;
+  // test
   console.log("HEADERS:", req.headers);
   console.log("METHOD:", req.method);
   console.log("BODY TYPE:", typeof req.body);
